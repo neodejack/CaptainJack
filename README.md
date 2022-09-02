@@ -4,7 +4,10 @@ intent to streamline day-to-day club operation, so that it's a smoother experien
 
 #### Hexagonal Architecture
 I'm setting up the project with a hexagonal architecture, so that my core functions (domains)
-are separated from the not really relevant technical details 
+are separated from the not really relevant technical details
+
+![hex_arch](https://user-images.githubusercontent.com/75655215/188204457-90452ce0-921a-46eb-a82d-d7cd844fbeb8.png)
+
 
 To list down some examples of what i'm trying to achieve with this architecture:
 
