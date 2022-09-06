@@ -3,7 +3,7 @@ package echoing
 type Echo struct {
 }
 
-func New() *Echo {
+func NewAdapter() *Echo {
 	return &Echo{}
 }
 
