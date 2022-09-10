@@ -3,18 +3,21 @@ package main
 import (
 	"github.com/neodejack/CaptainJack/hex/adapters/application/api"
 	"github.com/neodejack/CaptainJack/hex/adapters/core/echoing"
-	"github.com/neodejack/CaptainJack/hex/adapters/frameworks/driving/telegramBotUi"
+	"github.com/neodejack/CaptainJack/hex/adapters/frameworks/driven/secrets"
+	"github.com/neodejack/CaptainJack/hex/adapters/frameworks/driving/telebotui"
 	"github.com/neodejack/CaptainJack/hex/ports"
 )
 
 func main() {
 	var core ports.EchoingPort
 	var appAdapter ports.APIPorts
-	var teleBotAdapter ports.TeleAdapter
+	var teleBotAdapter ports.TelePort
+	var secretsAdapter ports.SecretsPorts
 
 	core = echoing.NewAdapter()
 	appAdapter = api.NewApplication(core)
-	teleBotAdapter = telegramBotUi.NewAdapter(appAdapter)
+	secretsAdapter = secrets.NewAdapterOS()
+	teleBotAdapter = telebotui.NewAdapter(appAdapter, secretsAdapter)
 
 	teleBotAdapter.Run()
 }
