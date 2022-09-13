@@ -12,7 +12,6 @@ COPY go.sum ./
 RUN go mod download
 
 COPY . .
-
 RUN go install ./cmd/CaptainJack
 
 RUN which CaptainJack
