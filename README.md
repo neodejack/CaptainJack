@@ -32,18 +32,12 @@ go run cmd/main.go
 
 ### The current progress
 
-haha just to make sure this architechture works i built a very obnoxious bot that replpy your message with "so what?"
-at the end of it
+Working on the endpoint that give users court allocations
 
-You just freaking hate it right?
+Currently finished the telegram bot ui adapter prototyping
 
-I kinda like it ngl
 
 ### What's Next
-An endpoint to give users the court allocations
-1. user are given option to select the date of the allocations that are available
-2. user can click the inline option to select the date of allocations that they are interested in
-3. user are return with a certain format of the court allocation data 
+Datebase adapter
+application adapter
 
-### Technology that i'm building this project with
-1. gRPC
