@@ -14,9 +14,10 @@ To list down some examples of what i'm trying to achieve with this architecture:
 1. Right now my choice of user interface (driving framework) is an interactive telegram bot, in the future 
 i can change this to a web app without having to 
 rewrite my core and application code again.
-2. My choice of database for the first iteration is literally just google sheets, cuz that's how our club operates,
-and that's where all the data is for now. 
-In the future i will user a proper PostgreSQL, 
+2. My choice of database for the first iteration is Postgres.
+But because all the data for the club matters are all stored in google sheets, i need to migrate the data and have the python script (most probably a lambda function) to migrate the data into database.
+
+In the future i will fully use postgres and get rid of google sheets
 and the cool thing is that i can just "unplug" the adapter of my current google sheets database 
 and just "plug in" my PostgreSQL database adapter under the driven framework part.
 
