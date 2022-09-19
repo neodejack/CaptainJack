@@ -1,5 +1,7 @@
 package funstufffortina
 
+import "log"
+
 type Echo struct {
 }
 
@@ -9,6 +11,9 @@ func NewAdapter() *Echo {
 
 func (echo Echo) Echoing(words string) (string, error) {
 	var annoyingWords string
+	log.Println("what i get:", words)
+	log.Println("what i want: i'm tina")
+
 	if words=="i'm tina" {
 		poem := `
 			We are both poets

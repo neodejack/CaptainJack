@@ -15,6 +15,23 @@ type Adapter struct {
 func NewAdapter(api ports.APIPorts, secrets ports.SecretsPorts) *Adapter {
 	return &Adapter{api: api, secrets: secrets}
 }
+func (telebot Adapter) InlineKeyboardForTine(update tgbotapi.Update) tgbotapi.MessageConfig {
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
+
+	courtDatesKeyboard := tgbotapi.NewInlineKeyboardMarkup(
+		tgbotapi.NewInlineKeyboardRow(
+			tgbotapi.NewInlineKeyboardButtonData("yes he's cute", "yes he's cute"),
+		),
+		tgbotapi.NewInlineKeyboardRow(
+			tgbotapi.NewInlineKeyboardButtonData("no", "yeah he's just an average dude"),
+		),
+	)
+
+	msg.ReplyMarkup = courtDatesKeyboard
+
+	return msg
+
+}
 
 func (telebot Adapter) InlineKeyboardWithCADates(update tgbotapi.Update) tgbotapi.MessageConfig {
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
@@ -40,7 +57,7 @@ func (telebot Adapter) CACallback(bot *tgbotapi.BotAPI, update tgbotapi.Update) 
 		panic(err)
 	}
 
-	callbackWords := update.CallbackQuery.Data + "call back response"
+	callbackWords := "EWWWWWWW CUTE"
 
 	msg := tgbotapi.NewMessage(update.CallbackQuery.Message.Chat.ID, callbackWords)
 
@@ -76,6 +93,8 @@ func (telebot Adapter) Run() {
 			log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 			switch update.Message.Text {
 			case "courtallocation":
+				msg = telebot.InlineKeyboardWithCADates(update)
+			case "zili?":
 				msg = telebot.InlineKeyboardWithCADates(update)
 			default:
 				msg, err = telebot.AnnoyingEchor(update)
