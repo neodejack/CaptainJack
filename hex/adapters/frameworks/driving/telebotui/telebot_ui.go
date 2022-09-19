@@ -96,7 +96,7 @@ func (telebot Adapter) Run() {
 				msg = telebot.InlineKeyboardWithCADates(update)
 			case "zili?":
 				msg = telebot.InlineKeyboardForTina(update)
-			default:
+			case "tina is here":
 				msg, err = telebot.AnnoyingEchor(update)
 				if err != nil {
 					log.Panic(err)
