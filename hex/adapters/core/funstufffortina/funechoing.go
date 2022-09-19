@@ -42,10 +42,10 @@ func (echo Echo) Echoing(words string) (string, error) {
 			say: can't you see it turn
 			like you do	
 		`
-		annoyingWords = "don't be too sad girl.\n " +
+		annoyingWords = "don't be too sad girl.\n" +
 			"you are gonna have some good food and take a solid night of sleep tonight.\n " +
 			"things will get easier.\n " +
-			"here's a cute poem for you if you are still falling sad" + poem
+			"here's a cute poem for you if you are still feeling sad" + poem
 
 		return annoyingWords, nil
 

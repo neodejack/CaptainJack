@@ -20,7 +20,7 @@ func (telebot Adapter) InlineKeyboardForTina(update tgbotapi.Update) tgbotapi.Me
 
 	courtDatesKeyboard := tgbotapi.NewInlineKeyboardMarkup(
 		tgbotapi.NewInlineKeyboardRow(
-			tgbotapi.NewInlineKeyboardButtonData("yes he's cute", "yes he's cute"),
+			tgbotapi.NewInlineKeyboardButtonData("yes he's cute", "EWWWWWWW CUTE"),
 		),
 		tgbotapi.NewInlineKeyboardRow(
 			tgbotapi.NewInlineKeyboardButtonData("no", "yeah he's just an average dude"),
@@ -57,7 +57,7 @@ func (telebot Adapter) CACallback(bot *tgbotapi.BotAPI, update tgbotapi.Update) 
 		panic(err)
 	}
 
-	callbackWords := "EWWWWWWW CUTE"
+	callbackWords := ""
 
 	msg := tgbotapi.NewMessage(update.CallbackQuery.Message.Chat.ID, callbackWords)
 
