@@ -15,7 +15,7 @@ type Adapter struct {
 func NewAdapter(api ports.APIPorts, secrets ports.SecretsPorts) *Adapter {
 	return &Adapter{api: api, secrets: secrets}
 }
-func (telebot Adapter) InlineKeyboardForTine(update tgbotapi.Update) tgbotapi.MessageConfig {
+func (telebot Adapter) InlineKeyboardForTina(update tgbotapi.Update) tgbotapi.MessageConfig {
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
 
 	courtDatesKeyboard := tgbotapi.NewInlineKeyboardMarkup(
@@ -95,7 +95,7 @@ func (telebot Adapter) Run() {
 			case "courtallocation":
 				msg = telebot.InlineKeyboardWithCADates(update)
 			case "zili?":
-				msg = telebot.InlineKeyboardWithCADates(update)
+				msg = telebot.InlineKeyboardForTina(update)
 			default:
 				msg, err = telebot.AnnoyingEchor(update)
 				if err != nil {
