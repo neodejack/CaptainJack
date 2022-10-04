@@ -18,6 +18,7 @@ rewrite my core and application code again.
 2. My choice of database for the first iteration is literally just google sheets, cuz that's how our club operates,
 and that's where all the data is for now. 
 In the future i will user a proper MySQL, 
+
 and the cool thing is that i can just "unplug" the adapter of my current google sheets database 
 and just "plug in" my MySQL database adapter under the driven framework part.
 
@@ -62,5 +63,6 @@ But please closely follow the steps stated here:
 2. Create a branch from Jira (i have done the integration so that the branch name will be linked to jira ticket)
 3. Code it out and test it locally, if you can please write well thought unit tests for your code
 4. Create a pull request to `beta` branch (DO NOT go straight to the `main` branch here)
+
 
 
