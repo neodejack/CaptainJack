@@ -14,6 +14,7 @@ To list down some examples of what i'm trying to achieve with this architecture:
 1. Right now my choice of user interface (driving framework) is an interactive telegram bot, in the future 
 i can change this to a web app without having to 
 rewrite my core and application code again.
+
 2. My choice of database for the first iteration is literally just google sheets, cuz that's how our club operates,
 and that's where all the data is for now. 
 In the future i will user a proper MySQL, 
@@ -32,12 +33,10 @@ go run cmd/main.go
 
 ### The current progress
 
-haha just to make sure this architechture works i built a very obnoxious bot that replpy your message with "so what?"
-at the end of it
+Working on the endpoint that give users court allocations
 
-You just freaking hate it right?
+Currently finished the telegram bot ui adapter prototyping
 
-I kinda like it ngl
 
 i also built an inlinekeyboard selection just to see what input i can get from telebot ui
 
@@ -63,6 +62,5 @@ But please closely follow the steps stated here:
 2. Create a branch from Jira (i have done the integration so that the branch name will be linked to jira ticket)
 3. Code it out and test it locally, if you can please write well thought unit tests for your code
 4. Create a pull request to `beta` branch (DO NOT go straight to the `main` branch here)
-
 
 
