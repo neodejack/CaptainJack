@@ -8,12 +8,50 @@ import (
 )
 
 type Adapter struct {
+
 	api ports.APIPorts
 	secrets ports.SecretsPorts
 }
 
 func NewAdapter(api ports.APIPorts, secrets ports.SecretsPorts) *Adapter {
 	return &Adapter{api: api, secrets: secrets}
+}
+
+func (telebot Adapter) InlineKeyboardWithCADates(update tgbotapi.Update) tgbotapi.MessageConfig {
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
+
+	courtDatesKeyboard := tgbotapi.NewInlineKeyboardMarkup(
+		tgbotapi.NewInlineKeyboardRow(
+			tgbotapi.NewInlineKeyboardButtonData("2022-09-20", "2022-09-20"),
+		),
+		tgbotapi.NewInlineKeyboardRow(
+			tgbotapi.NewInlineKeyboardButtonData("2022-09-22", "2022-09-22"),
+		),
+	)
+
+	msg.ReplyMarkup = courtDatesKeyboard
+
+	return msg
+
+}
+
+func (telebot Adapter) CACallback(bot *tgbotapi.BotAPI, update tgbotapi.Update) tgbotapi.MessageConfig {
+	callback := tgbotapi.NewCallback(update.CallbackQuery.ID, update.CallbackQuery.Data)
+	if _, err := bot.Request(callback); err != nil {
+		panic(err)
+	}
+
+	callbackWords := update.CallbackQuery.Data + "call back response"
+
+	msg := tgbotapi.NewMessage(update.CallbackQuery.Message.Chat.ID, callbackWords)
+
+	return msg
+}
+func (telebot Adapter) AnnoyingEchor(update tgbotapi.Update) (tgbotapi.MessageConfig, error) {
+	echoedWords, err := telebot.api.EchoWords(update.Message.Text)
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, echoedWords)
+	msg.ReplyToMessageID = update.Message.MessageID
+	return msg, err
 }
 
 func (telebot Adapter) Run() {
@@ -34,18 +72,25 @@ func (telebot Adapter) Run() {
 	updates := bot.GetUpdatesChan(u)
 
 	for update := range updates {
+		var msg tgbotapi.MessageConfig
 		if update.Message != nil { // If we got a message
 			log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
-
-			echoedWords, err := telebot.api.EchoWords(update.Message.Text)
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, echoedWords)
-			msg.ReplyToMessageID = update.Message.MessageID
-
-			_, err = bot.Send(msg)
-			if err != nil {
-				log.Panic(err)
+			switch update.Message.Text {
+			case "courtallocation":
+				msg = telebot.InlineKeyboardWithCADates(update)
+			default:
+				msg, err = telebot.AnnoyingEchor(update)
+				if err != nil {
+					log.Panic(err)
+				}
 			}
 
+		} else if update.CallbackQuery != nil {
+			msg = telebot.CACallback(bot, update)
+		}
+		_, err = bot.Send(msg)
+		if err != nil {
+			log.Panic(err)
 		}
 	}
 }
