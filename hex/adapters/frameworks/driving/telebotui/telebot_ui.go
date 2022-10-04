@@ -8,7 +8,8 @@ import (
 )
 
 type Adapter struct {
-	api     ports.APIPorts
+
+	api ports.APIPorts
 	secrets ports.SecretsPorts
 }
 

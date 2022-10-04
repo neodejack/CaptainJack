@@ -9,3 +9,4 @@ type AllocationViewerPorts interface {
 	CheckAllocationData(date string) (string, error)
 	SendAllocationDate(data string) error
 }
+
