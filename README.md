@@ -62,5 +62,3 @@ But please closely follow the steps stated here:
 2. Create a branch from Jira (i have done the integration so that the branch name will be linked to jira ticket)
 3. Code it out and test it locally, if you can please write well thought unit tests for your code
 4. Create a pull request to `beta` branch (DO NOT go straight to the `main` branch here)
-
-
