@@ -22,3 +22,13 @@ func (secrets AdapterOS) GetTeleToken() string {
 	return token
 
 }
+
+func (secrets AdapterOS) GetWebAppUrl() string {
+	webAppUrl := os.Getenv("WEBAPPURL")
+	if webAppUrl == "" {
+		err := errors.New("couldn't get webapp url")
+		log.Panic(err)
+	}
+	return webAppUrl
+
+}

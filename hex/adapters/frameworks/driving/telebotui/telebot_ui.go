@@ -35,6 +35,21 @@ func (telebot Adapter) InlineKeyboardWithCADates(update tgbotapi.Update) tgbotap
 
 }
 
+
+func (telebot Adapter) InlineKeyboardWithWebApp(update tgbotapi.Update) tgbotapi.MessageConfig {
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
+
+	courtDatesKeyboard := tgbotapi.NewInlineKeyboardMarkup(
+		tgbotapi.NewInlineKeyboardRow(
+			tgbotapi.NewInlineKeyboardButtonURL("webapp", telebot.secrets.GetWebAppUrl()),
+		),
+	)
+
+	msg.ReplyMarkup = courtDatesKeyboard
+
+	return msg
+
+}
 func (telebot Adapter) CACallback(bot *tgbotapi.BotAPI, update tgbotapi.Update) tgbotapi.MessageConfig {
 	callback := tgbotapi.NewCallback(update.CallbackQuery.ID, update.CallbackQuery.Data)
 	if _, err := bot.Request(callback); err != nil {
@@ -78,6 +93,8 @@ func (telebot Adapter) Run() {
 			switch update.Message.Text {
 			case "courtallocation":
 				msg = telebot.InlineKeyboardWithCADates(update)
+			case "Webapp":
+				msg = telebot.InlineKeyboardWithWebApp(update)
 			default:
 				msg, err = telebot.AnnoyingEchor(update)
 				if err != nil {
